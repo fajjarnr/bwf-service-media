@@ -47,9 +47,9 @@ router.post("/", (req, res) => {
       }
 
       // only on windows
-      const filename = filepath.split("\\").pop().split("/").pop();
+      // const filename = filepath.split("\\").pop().split("/").pop();
 
-      // const filename = filepath.split("/").pop();
+      const filename = filepath.split("/").pop();
 
       const media = await Media.create({ image: `images/${filename}` });
 
