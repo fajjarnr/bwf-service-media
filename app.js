@@ -6,6 +6,7 @@ require("dotenv").config();
 
 const indexRouter = require("./routes/index");
 const mediaRouter = require("./routes/media");
+const cloudinaryRouter = require("./routes/cloudinary");
 
 const app = express();
 
@@ -17,5 +18,6 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/media", mediaRouter);
+app.use("/cloudinary", cloudinaryRouter);
 
 module.exports = app;
