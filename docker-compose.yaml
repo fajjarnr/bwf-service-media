@@ -1,0 +1,44 @@
+version: "3.9"
+services:
+  bwf-service-media:
+    container_name: bwf-service-media
+    image: fajjarnr/bwf-service-media
+    build:
+      context: .
+    restart: always
+    environment:
+      PORT: 8080
+      HOSTNAME: http://bwf-service-media:8080
+      DB_HOSTNAME: bwf-micro.cyh0sfq8vv2a.ap-southeast-3.rds.amazonaws.com
+      DB_NAME: service_media
+      DB_USERNAME: admin
+      DB_PASSWORD: rahasia123
+      CLOUDINARY_CLOUD_NAME: fajjarnr
+      CLOUDINARY_API_KEY: 173732712996755
+      CLOUDINARY_API_SECRET: ByOw6DLIJArmNHdvWGQGxKsZMVM
+    ports:
+      - 8080:8080
+    # networks:
+    #   - bwf-service-media-network
+  # db-service-media:
+  #   container_name: db-service-media
+  #   image: mysql
+  #   restart: always
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: password
+  #     MYSQL_DATABASE: service-media
+  #     MYSQL_USER: admin
+  #     MYSQL_PASSWORD: rahasia
+  #   ports:
+  #     - 3306:3306
+  #   volumes:
+  #     - service-media-data:/var/lib/mysql
+  #   networks:
+  #     - bwf-service-media-network
+
+# networks:
+#   bwf-service-media-network:
+
+# volumes:
+#   service-media-data:
+#     driver: local
