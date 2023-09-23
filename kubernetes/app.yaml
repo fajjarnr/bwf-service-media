@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: env-service-media
+  namespace: bwf
+data:
+  PORT: '8080'
+  HOSTNAME: 'http://bwf-service-media'
+
+  DB_HOSTNAME: mysql-service
+  DB_NAME: service_media
+  DB_USERNAME: root
+  DB_PASSWORD: rahasia
+
+  CLOUDINARY_CLOUD_NAME: 'fajjarnr'
+  CLOUDINARY_API_KEY: '173732712996755'
+  CLOUDINARY_API_SECRET: 'ByOw6DLIJArmNHdvWGQGxKsZMVM'
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bwf-service-media
+  namespace: bwf
+  labels:
+    app: bwf-service-media
+spec:
+  selector:
+    matchLabels:
+      app: bwf-service-media
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: bwf-service-media
+    spec:
+      containers:
+        - name: bwf-service-media
+          image: fajjarnr/bwf-service-media:latest
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: env-service-media

@@ -1,30 +1,25 @@
-FROM node:18.16.1-alpine
+# Gunakan image Ubuntu sebagai dasar
+FROM ubuntu
 
-# Create app directory
-WORKDIR /usr/src/app
+# Install dependencies yang dibutuhkan
+RUN apt-get update && apt-get install -y \
+    curl \
+    nodejs \
+    npm
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package*.json ./
+# Buat direktori untuk aplikasi Anda
+WORKDIR /app
 
-RUN npm install
-# If you are building your code for production
-# RUN npm ci --omit=dev
-
-# Bundle app source
+# Salin aplikasi Node.js Express Anda ke dalam container
 COPY . .
 
-# ENV PORT=8080 \
-#     HOSTNAME=http://bwf-service-media:8080 \
-#     DB_HOSTNAME=db-service-user \
-#     DB_NAME=service-user \
-#     DB_USERNAME=admin \
-#     DB_PASSWORD=rahasia \
-#     CLOUDINARY_CLOUD_NAME="" \
-#     CLOUDINARY_API_KEY="" \
-#     CLOUDINARY_API_SECRET="" 
+# Install modul Node.js
+RUN npm install
 
+# Ekspor port yang akan digunakan oleh aplikasi Anda (ganti sesuai dengan port aplikasi Anda)
 EXPOSE 8080
 
-CMD [ "npm", "run", "start" ]
+USER 1001
+
+# Jalankan aplikasi Anda
+CMD ["npm", "start"]
