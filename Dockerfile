@@ -17,7 +17,7 @@ COPY . .
 RUN npm install
 
 # Ekspor port yang akan digunakan oleh aplikasi Anda (ganti sesuai dengan port aplikasi Anda)
-EXPOSE 8080
+EXPOSE 8081
 
 USER 1001
 
